@@ -98,6 +98,8 @@ namespace Azure.Communication.CallAutomation
                     return AddParticipantSucceeded.Deserialize(eventData);
                 case nameof(CallConnected):
                     return CallConnected.Deserialize(eventData);
+                case nameof(CreateCallFailed):
+                    return CreateCallFailed.Deserialize(eventData);
                 case nameof(CallDisconnected):
                     return CallDisconnected.Deserialize(eventData);
                 case nameof(CallTransferAccepted):
