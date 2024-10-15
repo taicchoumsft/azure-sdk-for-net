@@ -28,7 +28,6 @@ namespace Azure.Communication.CallAutomation
         /// <summary> Initializes a new instance of <see cref="AnswerCallRequestInternal"/>. </summary>
         /// <param name="incomingCallContext"> The context associated with the call. </param>
         /// <param name="callbackUri"> The callback uri. </param>
-        /// <param name="customCallingContext"> Used by customer to send custom calling context to targets when answering On-Behalf-Of call. </param>
         /// <param name="operationContext"> A customer set value used to track the answering of a call. </param>
         /// <param name="callIntelligenceOptions"> AI options for the call. </param>
         /// <param name="answeredBy"> The identifier of the call automation entity which answers the call. </param>
@@ -38,7 +37,6 @@ namespace Azure.Communication.CallAutomation
         {
             IncomingCallContext = incomingCallContext;
             CallbackUri = callbackUri;
-            CustomCallingContext = customCallingContext;
             OperationContext = operationContext;
             CallIntelligenceOptions = callIntelligenceOptions;
             AnsweredBy = answeredBy;
