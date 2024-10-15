@@ -28,6 +28,7 @@ namespace Azure.ResourceManager.EdgeOrder.Models
         private const string DocumentationValue = "Documentation";
         private const string KnowMoreValue = "KnowMore";
         private const string SignUpValue = "SignUp";
+        private const string DiscoverableValue = "Discoverable";
 
         /// <summary> Generic link. </summary>
         public static ProductLinkType Generic { get; } = new ProductLinkType(GenericValue);
@@ -41,11 +42,13 @@ namespace Azure.ResourceManager.EdgeOrder.Models
         public static ProductLinkType KnowMore { get; } = new ProductLinkType(KnowMoreValue);
         /// <summary> Link to sign up for products. </summary>
         public static ProductLinkType SignUp { get; } = new ProductLinkType(SignUpValue);
+        /// <summary> Link to order the product from another source and not from Azure Edge Hardware Center. </summary>
+        public static ProductLinkType Discoverable { get; } = new ProductLinkType(DiscoverableValue);
         /// <summary> Determines if two <see cref="ProductLinkType"/> values are the same. </summary>
         public static bool operator ==(ProductLinkType left, ProductLinkType right) => left.Equals(right);
         /// <summary> Determines if two <see cref="ProductLinkType"/> values are not the same. </summary>
         public static bool operator !=(ProductLinkType left, ProductLinkType right) => !left.Equals(right);
-        /// <summary> Converts a <see cref="string"/> to a <see cref="ProductLinkType"/>. </summary>
+        /// <summary> Converts a string to a <see cref="ProductLinkType"/>. </summary>
         public static implicit operator ProductLinkType(string value) => new ProductLinkType(value);
 
         /// <inheritdoc />
@@ -56,7 +59,7 @@ namespace Azure.ResourceManager.EdgeOrder.Models
 
         /// <inheritdoc />
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public override int GetHashCode() => _value != null ? StringComparer.InvariantCultureIgnoreCase.GetHashCode(_value) : 0;
+        public override int GetHashCode() => _value?.GetHashCode() ?? 0;
         /// <inheritdoc />
         public override string ToString() => _value;
     }
