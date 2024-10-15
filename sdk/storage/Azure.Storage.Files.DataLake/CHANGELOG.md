@@ -1,6 +1,6 @@
 # Release History
 
-## 12.20.0-beta.1 (Unreleased)
+## 12.21.0-beta.2 (Unreleased)
 
 ### Features Added
 
@@ -9,6 +9,33 @@
 ### Bugs Fixed
 
 ### Other Changes
+
+## 12.21.0-beta.1 (2024-10-08)
+
+### Features Added
+- Added support for service version 2025-01-05.
+- Added GenerateUserDelegationSasUri() for DataLakePathClient, DataLakeFileSystemClient, and DataLakeDirectoryClient
+- Deprecated Read()/ReadAsync() in favor of ReadStreaming()/ReadStreamingAsync() and ReadContent()/ReadContentAsync() for DataLake #45418
+- Added GenerateUserDelegationSasUri() to DataLakeFileSystemClient, DataLakePathClient, DataLakeDirectoryClient, and DataLakeFileClient.
+
+## 12.20.0 (2024-09-18)
+
+### Features Added
+- Includes all features from 12.20.0-beta.1.
+
+### Bugs Fixed
+- Fixed \[BUG\] Method overload DataLakeFileClient.OpenReadAsync()/OpenRead() to correctly handle the allowBlobModifications flag #45516
+
+## 12.20.0-beta.1 (2024-08-06)
+
+### Features Added
+- Added support for service version 2024-11-04.
+- Added ability to retrieve SAS string to sign for debugging purposes.
+
+## 12.19.1 (2024-07-25)
+
+### Bugs Fixed
+- Fixed \[BUG\] Azure Blob Storage Client SDK No Longer Supports Globalization Invariant Mode for Account Key Authentication #45052
 
 ## 12.19.0 (2024-07-16)
 

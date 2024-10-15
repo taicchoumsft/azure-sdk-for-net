@@ -4,9 +4,13 @@
 
 ### Features Added
 
+- Exposed `JsonModelWriteCore` for model serialization procedure.
+
 ### Breaking Changes
 
 ### Bugs Fixed
+
+- Exposed 'DnsRecordType' property in DnsRecordData.cs and added factory method for DnsRecordData. Issue:https://github.com/Azure/azure-sdk-for-net/issues/45423
 
 ### Other Changes
 

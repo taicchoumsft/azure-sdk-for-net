@@ -1,6 +1,6 @@
 # Release History
 
-## 12.19.0-beta.1 (Unreleased)
+## 12.20.0-beta.2 (Unreleased)
 
 ### Features Added
 
@@ -9,6 +9,26 @@
 ### Bugs Fixed
 
 ### Other Changes
+
+## 12.20.0-beta.1 (2024-10-08)
+
+### Features Added
+- Added support for service version 2025-01-05.
+
+## 12.19.0 (2024-09-18)
+
+### Features Added
+- Includes all features from 12.19.0-beta.1.
+
+## 12.19.0-beta.1 (2024-08-06)
+
+### Features Added
+- Added support for service version 2024-11-04.
+
+## 12.18.1 (2024-07-25)
+
+### Bugs Fixed
+- Fixed \[BUG\] Azure Blob Storage Client SDK No Longer Supports Globalization Invariant Mode for Account Key Authentication #45052
 
 ## 12.18.0 (2024-07-16)
 

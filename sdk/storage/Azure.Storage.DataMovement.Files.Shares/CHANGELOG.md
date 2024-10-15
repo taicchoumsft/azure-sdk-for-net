@@ -5,8 +5,12 @@
 ### Features Added
 
 ### Breaking Changes
+- Changed `FromDirectory(string directoryUri, ShareFileStorageResourceOptions options = default)` to `FromDirectory(Uri directoryUri, ShareFileStorageResourceOptions options = default)`
+- Changed `FromFile(string fileUri, ShareFileStorageResourceOptions options = default)` to `FromFile(Uri fileUri, ShareFileStorageResourceOptions options = default)`
 
 ### Bugs Fixed
+- Fixed bug where copying a Azure Storage Blob to a Share File would not be able to convert Content Language and Content Encoding to the `string[]` type.
+- Fixed bug where LastWrittenOn property was not being preserved when copying a Share File to another Share File.
 
 ### Other Changes
 

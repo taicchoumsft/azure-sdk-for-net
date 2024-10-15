@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.IO;
 using System.Threading;
 using Azure.Core;
+using Azure.Storage.Common;
 
 namespace Azure.Storage.DataMovement
 {
@@ -142,6 +143,9 @@ namespace Azure.Storage.DataMovement
             StorageResourceItem destinationResource,
             long? length = default)
         {
+            Argument.AssertNotNull(sourceResource, nameof(sourceResource));
+            Argument.AssertNotNull(destinationResource, nameof(destinationResource));
+
             // Create Job Part file as we're initializing the job part
             UriToStreamJobPart part = new UriToStreamJobPart(
                 job: job,
@@ -291,7 +295,7 @@ namespace Azure.Storage.DataMovement
                 // To prevent requesting a range that is invalid when
                 // we already know the length we can just make one get blob request.
                 StorageResourceReadStreamResult result = await _sourceResource.
-                    ReadStreamAsync(cancellationToken: _cancellationToken)
+                    ReadStreamAsync(length: totalLength, cancellationToken: _cancellationToken)
                     .ConfigureAwait(false);
 
                 long downloadLength = result.ContentLength.Value;
