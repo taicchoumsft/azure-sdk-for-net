@@ -48,8 +48,6 @@ namespace Azure.Communication.CallAutomation
         public string IncomingCallContext { get; }
         /// <summary> The callback uri. </summary>
         public string CallbackUri { get; }
-        /// <summary> Used by customer to send custom calling context to targets when answering On-Behalf-Of call. </summary>
-        public CustomCallingContextInternal CustomCallingContext { get; set; }
         /// <summary> A customer set value used to track the answering of a call. </summary>
         public string OperationContext { get; set; }
         /// <summary> AI options for the call. </summary>
