@@ -4,6 +4,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure.Core;
@@ -31,12 +32,15 @@ namespace Azure.Health.Deidentification.Samples
             string storageAccountUrl = TestEnvironment.GetStorageAccountLocation();
 
             #region Snippet:AzHealthDeidSample2_CreateJob
+            JobCustomizationConfig customizations = new()
+            {
+                Operation = OperationType.Surrogate,
+            };
             DeidentificationJob job = new()
             {
-                SourceLocation = new SourceStorageLocation(new Uri(storageAccountUrl), "folder1/"),
+                SourceLocation = new SourceStorageLocation(new Uri(storageAccountUrl), "folder1/", new List<string>() { "*" }, DocumentDataType.Plaintext, null),
                 TargetLocation = new TargetStorageLocation(new Uri(storageAccountUrl), "output_path"),
-                DataType = DocumentDataType.Plaintext,
-                Operation = OperationType.Surrogate
+                Customizations = customizations
             };
 
             job = client.CreateJob(WaitUntil.Started, "my-job-1", job).Value;
