@@ -1,0 +1,1037 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <members>
+    <member name="SubmitTranscriptionAsync(Transcription,CancellationToken)">
+      <example>
+This sample shows how to call SubmitTranscriptionAsync.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+SpeechClient client = new SpeechClient(endpoint, credential);
+
+Transcription transcription = new Transcription(new TranscriptionProperties("<timeToLive>"), "<locale>", "<displayName>");
+Response<Transcription> response = await client.SubmitTranscriptionAsync(transcription);
+]]></code>
+This sample shows how to call SubmitTranscriptionAsync with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+SpeechClient client = new SpeechClient(endpoint, credential);
+
+Transcription transcription = new Transcription(new TranscriptionProperties("<timeToLive>")
+{
+    WordLevelTimestampsEnabled = true,
+    DisplayFormWordLevelTimestampsEnabled = true,
+    Channels = { 1234 },
+    DestinationContainerUrl = new Uri("http://localhost:3000"),
+    PunctuationMode = PunctuationMode.None,
+    ProfanityFilterMode = ProfanityFilterMode.None,
+    Error = new EntityError(),
+    Diarization = new DiarizationProperties
+    {
+        Enabled = true,
+        MaxSpeakers = 1234,
+    },
+    LanguageIdentification = new LanguageIdentificationProperties(new string[] { "<candidateLocales>" })
+    {
+        Mode = LanguageIdentificationMode.Continuous,
+        SpeechModelMapping =
+        {
+            ["key"] = new EntityReference(new Uri("http://localhost:3000"))
+        },
+    },
+}, "<locale>", "<displayName>")
+{
+    Links = new TranscriptionLinks(),
+    Model = default,
+    Dataset = default,
+    ContentUrls = { new Uri("http://localhost:3000") },
+    ContentContainerUrl = new Uri("http://localhost:3000"),
+    Description = "<description>",
+    CustomProperties =
+    {
+        ["key"] = "<customProperties>"
+    },
+    Project = default,
+    Status = Status.NotStarted,
+};
+Response<Transcription> response = await client.SubmitTranscriptionAsync(transcription);
+]]></code></example>
+    </member>
+    <member name="SubmitTranscription(Transcription,CancellationToken)">
+      <example>
+This sample shows how to call SubmitTranscription.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+SpeechClient client = new SpeechClient(endpoint, credential);
+
+Transcription transcription = new Transcription(new TranscriptionProperties("<timeToLive>"), "<locale>", "<displayName>");
+Response<Transcription> response = client.SubmitTranscription(transcription);
+]]></code>
+This sample shows how to call SubmitTranscription with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+SpeechClient client = new SpeechClient(endpoint, credential);
+
+Transcription transcription = new Transcription(new TranscriptionProperties("<timeToLive>")
+{
+    WordLevelTimestampsEnabled = true,
+    DisplayFormWordLevelTimestampsEnabled = true,
+    Channels = { 1234 },
+    DestinationContainerUrl = new Uri("http://localhost:3000"),
+    PunctuationMode = PunctuationMode.None,
+    ProfanityFilterMode = ProfanityFilterMode.None,
+    Error = new EntityError(),
+    Diarization = new DiarizationProperties
+    {
+        Enabled = true,
+        MaxSpeakers = 1234,
+    },
+    LanguageIdentification = new LanguageIdentificationProperties(new string[] { "<candidateLocales>" })
+    {
+        Mode = LanguageIdentificationMode.Continuous,
+        SpeechModelMapping =
+        {
+            ["key"] = new EntityReference(new Uri("http://localhost:3000"))
+        },
+    },
+}, "<locale>", "<displayName>")
+{
+    Links = new TranscriptionLinks(),
+    Model = default,
+    Dataset = default,
+    ContentUrls = { new Uri("http://localhost:3000") },
+    ContentContainerUrl = new Uri("http://localhost:3000"),
+    Description = "<description>",
+    CustomProperties =
+    {
+        ["key"] = "<customProperties>"
+    },
+    Project = default,
+    Status = Status.NotStarted,
+};
+Response<Transcription> response = client.SubmitTranscription(transcription);
+]]></code></example>
+    </member>
+    <member name="SubmitTranscriptionAsync(RequestContent,RequestContext)">
+      <example>
+This sample shows how to call SubmitTranscriptionAsync and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+SpeechClient client = new SpeechClient(endpoint, credential);
+
+using RequestContent content = RequestContent.Create(new
+{
+    properties = new
+    {
+        timeToLive = "<timeToLive>",
+    },
+    locale = "<locale>",
+    displayName = "<displayName>",
+});
+Response response = await client.SubmitTranscriptionAsync(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("properties").GetProperty("timeToLive").ToString());
+Console.WriteLine(result.GetProperty("locale").ToString());
+Console.WriteLine(result.GetProperty("displayName").ToString());
+]]></code>
+This sample shows how to call SubmitTranscriptionAsync with all request content and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+SpeechClient client = new SpeechClient(endpoint, credential);
+
+using RequestContent content = RequestContent.Create(new
+{
+    links = new object(),
+    properties = new
+    {
+        wordLevelTimestampsEnabled = true,
+        displayFormWordLevelTimestampsEnabled = true,
+        channels = new object[]
+        {
+            1234
+        },
+        destinationContainerUrl = "http://localhost:3000",
+        punctuationMode = "None",
+        profanityFilterMode = "None",
+        timeToLive = "<timeToLive>",
+        error = new object(),
+        diarization = new
+        {
+            enabled = true,
+            maxSpeakers = 1234,
+        },
+        languageIdentification = new
+        {
+            mode = "Continuous",
+            candidateLocales = new object[]
+            {
+                "<candidateLocales>"
+            },
+            speechModelMapping = new
+            {
+                key = new
+                {
+                    self = "http://localhost:3000",
+                },
+            },
+        },
+    },
+    contentUrls = new object[]
+    {
+        "http://localhost:3000"
+    },
+    contentContainerUrl = "http://localhost:3000",
+    locale = "<locale>",
+    displayName = "<displayName>",
+    description = "<description>",
+    customProperties = new
+    {
+        key = "<customProperties>",
+    },
+    status = "NotStarted",
+});
+Response response = await client.SubmitTranscriptionAsync(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("links").GetProperty("files").ToString());
+Console.WriteLine(result.GetProperty("properties").GetProperty("wordLevelTimestampsEnabled").ToString());
+Console.WriteLine(result.GetProperty("properties").GetProperty("displayFormWordLevelTimestampsEnabled").ToString());
+Console.WriteLine(result.GetProperty("properties").GetProperty("duration").ToString());
+Console.WriteLine(result.GetProperty("properties").GetProperty("channels")[0].ToString());
+Console.WriteLine(result.GetProperty("properties").GetProperty("destinationContainerUrl").ToString());
+Console.WriteLine(result.GetProperty("properties").GetProperty("punctuationMode").ToString());
+Console.WriteLine(result.GetProperty("properties").GetProperty("profanityFilterMode").ToString());
+Console.WriteLine(result.GetProperty("properties").GetProperty("timeToLive").ToString());
+Console.WriteLine(result.GetProperty("properties").GetProperty("error").GetProperty("code").ToString());
+Console.WriteLine(result.GetProperty("properties").GetProperty("error").GetProperty("message").ToString());
+Console.WriteLine(result.GetProperty("properties").GetProperty("diarization").GetProperty("enabled").ToString());
+Console.WriteLine(result.GetProperty("properties").GetProperty("diarization").GetProperty("maxSpeakers").ToString());
+Console.WriteLine(result.GetProperty("properties").GetProperty("languageIdentification").GetProperty("mode").ToString());
+Console.WriteLine(result.GetProperty("properties").GetProperty("languageIdentification").GetProperty("candidateLocales")[0].ToString());
+Console.WriteLine(result.GetProperty("properties").GetProperty("languageIdentification").GetProperty("speechModelMapping").GetProperty("<key>").GetProperty("self").ToString());
+Console.WriteLine(result.GetProperty("self").ToString());
+Console.WriteLine(result.GetProperty("model").GetProperty("self").ToString());
+Console.WriteLine(result.GetProperty("dataset").GetProperty("self").ToString());
+Console.WriteLine(result.GetProperty("contentUrls")[0].ToString());
+Console.WriteLine(result.GetProperty("contentContainerUrl").ToString());
+Console.WriteLine(result.GetProperty("locale").ToString());
+Console.WriteLine(result.GetProperty("displayName").ToString());
+Console.WriteLine(result.GetProperty("description").ToString());
+Console.WriteLine(result.GetProperty("customProperties").GetProperty("<key>").ToString());
+Console.WriteLine(result.GetProperty("project").GetProperty("self").ToString());
+Console.WriteLine(result.GetProperty("lastActionDateTime").ToString());
+Console.WriteLine(result.GetProperty("status").ToString());
+Console.WriteLine(result.GetProperty("createdDateTime").ToString());
+]]></code></example>
+    </member>
+    <member name="SubmitTranscription(RequestContent,RequestContext)">
+      <example>
+This sample shows how to call SubmitTranscription and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+SpeechClient client = new SpeechClient(endpoint, credential);
+
+using RequestContent content = RequestContent.Create(new
+{
+    properties = new
+    {
+        timeToLive = "<timeToLive>",
+    },
+    locale = "<locale>",
+    displayName = "<displayName>",
+});
+Response response = client.SubmitTranscription(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("properties").GetProperty("timeToLive").ToString());
+Console.WriteLine(result.GetProperty("locale").ToString());
+Console.WriteLine(result.GetProperty("displayName").ToString());
+]]></code>
+This sample shows how to call SubmitTranscription with all request content and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+SpeechClient client = new SpeechClient(endpoint, credential);
+
+using RequestContent content = RequestContent.Create(new
+{
+    links = new object(),
+    properties = new
+    {
+        wordLevelTimestampsEnabled = true,
+        displayFormWordLevelTimestampsEnabled = true,
+        channels = new object[]
+        {
+            1234
+        },
+        destinationContainerUrl = "http://localhost:3000",
+        punctuationMode = "None",
+        profanityFilterMode = "None",
+        timeToLive = "<timeToLive>",
+        error = new object(),
+        diarization = new
+        {
+            enabled = true,
+            maxSpeakers = 1234,
+        },
+        languageIdentification = new
+        {
+            mode = "Continuous",
+            candidateLocales = new object[]
+            {
+                "<candidateLocales>"
+            },
+            speechModelMapping = new
+            {
+                key = new
+                {
+                    self = "http://localhost:3000",
+                },
+            },
+        },
+    },
+    contentUrls = new object[]
+    {
+        "http://localhost:3000"
+    },
+    contentContainerUrl = "http://localhost:3000",
+    locale = "<locale>",
+    displayName = "<displayName>",
+    description = "<description>",
+    customProperties = new
+    {
+        key = "<customProperties>",
+    },
+    status = "NotStarted",
+});
+Response response = client.SubmitTranscription(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("links").GetProperty("files").ToString());
+Console.WriteLine(result.GetProperty("properties").GetProperty("wordLevelTimestampsEnabled").ToString());
+Console.WriteLine(result.GetProperty("properties").GetProperty("displayFormWordLevelTimestampsEnabled").ToString());
+Console.WriteLine(result.GetProperty("properties").GetProperty("duration").ToString());
+Console.WriteLine(result.GetProperty("properties").GetProperty("channels")[0].ToString());
+Console.WriteLine(result.GetProperty("properties").GetProperty("destinationContainerUrl").ToString());
+Console.WriteLine(result.GetProperty("properties").GetProperty("punctuationMode").ToString());
+Console.WriteLine(result.GetProperty("properties").GetProperty("profanityFilterMode").ToString());
+Console.WriteLine(result.GetProperty("properties").GetProperty("timeToLive").ToString());
+Console.WriteLine(result.GetProperty("properties").GetProperty("error").GetProperty("code").ToString());
+Console.WriteLine(result.GetProperty("properties").GetProperty("error").GetProperty("message").ToString());
+Console.WriteLine(result.GetProperty("properties").GetProperty("diarization").GetProperty("enabled").ToString());
+Console.WriteLine(result.GetProperty("properties").GetProperty("diarization").GetProperty("maxSpeakers").ToString());
+Console.WriteLine(result.GetProperty("properties").GetProperty("languageIdentification").GetProperty("mode").ToString());
+Console.WriteLine(result.GetProperty("properties").GetProperty("languageIdentification").GetProperty("candidateLocales")[0].ToString());
+Console.WriteLine(result.GetProperty("properties").GetProperty("languageIdentification").GetProperty("speechModelMapping").GetProperty("<key>").GetProperty("self").ToString());
+Console.WriteLine(result.GetProperty("self").ToString());
+Console.WriteLine(result.GetProperty("model").GetProperty("self").ToString());
+Console.WriteLine(result.GetProperty("dataset").GetProperty("self").ToString());
+Console.WriteLine(result.GetProperty("contentUrls")[0].ToString());
+Console.WriteLine(result.GetProperty("contentContainerUrl").ToString());
+Console.WriteLine(result.GetProperty("locale").ToString());
+Console.WriteLine(result.GetProperty("displayName").ToString());
+Console.WriteLine(result.GetProperty("description").ToString());
+Console.WriteLine(result.GetProperty("customProperties").GetProperty("<key>").ToString());
+Console.WriteLine(result.GetProperty("project").GetProperty("self").ToString());
+Console.WriteLine(result.GetProperty("lastActionDateTime").ToString());
+Console.WriteLine(result.GetProperty("status").ToString());
+Console.WriteLine(result.GetProperty("createdDateTime").ToString());
+]]></code></example>
+    </member>
+    <member name="TranscribeTranscriptionAsync(Stream,TranscribeDefinition,CancellationToken)">
+      <example>
+This sample shows how to call TranscribeTranscriptionAsync.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+SpeechClient client = new SpeechClient(endpoint, credential);
+
+Response<TranscribeResult> response = await client.TranscribeTranscriptionAsync(null);
+]]></code>
+This sample shows how to call TranscribeTranscriptionAsync with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+SpeechClient client = new SpeechClient(endpoint, credential);
+
+TranscribeDefinition definition = new TranscribeDefinition
+{
+    Locales = { "<locales>" },
+    Models =
+    {
+        ["key"] = new Uri("http://localhost:3000")
+    },
+    ProfanityFilterMode = ProfanityFilterMode.None,
+    Diarization = new TranscribeDiarizationProperties
+    {
+        Enabled = true,
+        MaxSpeakers = 1234,
+    },
+    Channels = { 1234 },
+};
+Response<TranscribeResult> response = await client.TranscribeTranscriptionAsync(null, definition: definition);
+]]></code></example>
+    </member>
+    <member name="TranscribeTranscription(Stream,TranscribeDefinition,CancellationToken)">
+      <example>
+This sample shows how to call TranscribeTranscription.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+SpeechClient client = new SpeechClient(endpoint, credential);
+
+Response<TranscribeResult> response = client.TranscribeTranscription(null);
+]]></code>
+This sample shows how to call TranscribeTranscription with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+SpeechClient client = new SpeechClient(endpoint, credential);
+
+TranscribeDefinition definition = new TranscribeDefinition
+{
+    Locales = { "<locales>" },
+    Models =
+    {
+        ["key"] = new Uri("http://localhost:3000")
+    },
+    ProfanityFilterMode = ProfanityFilterMode.None,
+    Diarization = new TranscribeDiarizationProperties
+    {
+        Enabled = true,
+        MaxSpeakers = 1234,
+    },
+    Channels = { 1234 },
+};
+Response<TranscribeResult> response = client.TranscribeTranscription(null, definition: definition);
+]]></code></example>
+    </member>
+    <member name="TranscribeTranscriptionAsync(RequestContent,string,RequestContext)">
+      <example>
+This sample shows how to call TranscribeTranscriptionAsync and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+SpeechClient client = new SpeechClient(endpoint, credential);
+
+using RequestContent content = RequestContent.Create(new
+{
+    audio = File.OpenRead("<filePath>"),
+});
+Response response = await client.TranscribeTranscriptionAsync(content, "multipart/form-data");
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("durationMilliseconds").ToString());
+Console.WriteLine(result.GetProperty("combinedPhrases")[0].GetProperty("text").ToString());
+Console.WriteLine(result.GetProperty("phrases")[0].GetProperty("offsetMilliseconds").ToString());
+Console.WriteLine(result.GetProperty("phrases")[0].GetProperty("durationMilliseconds").ToString());
+Console.WriteLine(result.GetProperty("phrases")[0].GetProperty("text").ToString());
+Console.WriteLine(result.GetProperty("phrases")[0].GetProperty("confidence").ToString());
+]]></code>
+This sample shows how to call TranscribeTranscriptionAsync with all parameters and request content and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+SpeechClient client = new SpeechClient(endpoint, credential);
+
+using RequestContent content = RequestContent.Create(new
+{
+    definition = new
+    {
+        locales = new object[]
+        {
+            "<locales>"
+        },
+        models = new
+        {
+            key = "http://localhost:3000",
+        },
+        profanityFilterMode = "None",
+        diarization = new
+        {
+            enabled = true,
+            maxSpeakers = 1234,
+        },
+        channels = new object[]
+        {
+            1234
+        },
+    },
+    audio = File.OpenRead("<filePath>"),
+});
+Response response = await client.TranscribeTranscriptionAsync(content, "multipart/form-data");
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("durationMilliseconds").ToString());
+Console.WriteLine(result.GetProperty("combinedPhrases")[0].GetProperty("channel").ToString());
+Console.WriteLine(result.GetProperty("combinedPhrases")[0].GetProperty("text").ToString());
+Console.WriteLine(result.GetProperty("phrases")[0].GetProperty("channel").ToString());
+Console.WriteLine(result.GetProperty("phrases")[0].GetProperty("speaker").ToString());
+Console.WriteLine(result.GetProperty("phrases")[0].GetProperty("offsetMilliseconds").ToString());
+Console.WriteLine(result.GetProperty("phrases")[0].GetProperty("durationMilliseconds").ToString());
+Console.WriteLine(result.GetProperty("phrases")[0].GetProperty("text").ToString());
+Console.WriteLine(result.GetProperty("phrases")[0].GetProperty("words")[0].GetProperty("text").ToString());
+Console.WriteLine(result.GetProperty("phrases")[0].GetProperty("words")[0].GetProperty("offsetMilliseconds").ToString());
+Console.WriteLine(result.GetProperty("phrases")[0].GetProperty("words")[0].GetProperty("durationMilliseconds").ToString());
+Console.WriteLine(result.GetProperty("phrases")[0].GetProperty("locale").ToString());
+Console.WriteLine(result.GetProperty("phrases")[0].GetProperty("confidence").ToString());
+]]></code></example>
+    </member>
+    <member name="TranscribeTranscription(RequestContent,string,RequestContext)">
+      <example>
+This sample shows how to call TranscribeTranscription and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+SpeechClient client = new SpeechClient(endpoint, credential);
+
+using RequestContent content = RequestContent.Create(new
+{
+    audio = File.OpenRead("<filePath>"),
+});
+Response response = client.TranscribeTranscription(content, "multipart/form-data");
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("durationMilliseconds").ToString());
+Console.WriteLine(result.GetProperty("combinedPhrases")[0].GetProperty("text").ToString());
+Console.WriteLine(result.GetProperty("phrases")[0].GetProperty("offsetMilliseconds").ToString());
+Console.WriteLine(result.GetProperty("phrases")[0].GetProperty("durationMilliseconds").ToString());
+Console.WriteLine(result.GetProperty("phrases")[0].GetProperty("text").ToString());
+Console.WriteLine(result.GetProperty("phrases")[0].GetProperty("confidence").ToString());
+]]></code>
+This sample shows how to call TranscribeTranscription with all parameters and request content and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+SpeechClient client = new SpeechClient(endpoint, credential);
+
+using RequestContent content = RequestContent.Create(new
+{
+    definition = new
+    {
+        locales = new object[]
+        {
+            "<locales>"
+        },
+        models = new
+        {
+            key = "http://localhost:3000",
+        },
+        profanityFilterMode = "None",
+        diarization = new
+        {
+            enabled = true,
+            maxSpeakers = 1234,
+        },
+        channels = new object[]
+        {
+            1234
+        },
+    },
+    audio = File.OpenRead("<filePath>"),
+});
+Response response = client.TranscribeTranscription(content, "multipart/form-data");
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("durationMilliseconds").ToString());
+Console.WriteLine(result.GetProperty("combinedPhrases")[0].GetProperty("channel").ToString());
+Console.WriteLine(result.GetProperty("combinedPhrases")[0].GetProperty("text").ToString());
+Console.WriteLine(result.GetProperty("phrases")[0].GetProperty("channel").ToString());
+Console.WriteLine(result.GetProperty("phrases")[0].GetProperty("speaker").ToString());
+Console.WriteLine(result.GetProperty("phrases")[0].GetProperty("offsetMilliseconds").ToString());
+Console.WriteLine(result.GetProperty("phrases")[0].GetProperty("durationMilliseconds").ToString());
+Console.WriteLine(result.GetProperty("phrases")[0].GetProperty("text").ToString());
+Console.WriteLine(result.GetProperty("phrases")[0].GetProperty("words")[0].GetProperty("text").ToString());
+Console.WriteLine(result.GetProperty("phrases")[0].GetProperty("words")[0].GetProperty("offsetMilliseconds").ToString());
+Console.WriteLine(result.GetProperty("phrases")[0].GetProperty("words")[0].GetProperty("durationMilliseconds").ToString());
+Console.WriteLine(result.GetProperty("phrases")[0].GetProperty("locale").ToString());
+Console.WriteLine(result.GetProperty("phrases")[0].GetProperty("confidence").ToString());
+]]></code></example>
+    </member>
+    <member name="GetTranscriptionsAsync(int?,int?,string,CancellationToken)">
+      <example>
+This sample shows how to call GetTranscriptionsAsync.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+SpeechClient client = new SpeechClient(endpoint, credential);
+
+Response<PageableTranscription> response = await client.GetTranscriptionsAsync();
+]]></code>
+This sample shows how to call GetTranscriptionsAsync with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+SpeechClient client = new SpeechClient(endpoint, credential);
+
+Response<PageableTranscription> response = await client.GetTranscriptionsAsync(skip: 1234, top: 1234, filter: "<filter>");
+]]></code></example>
+    </member>
+    <member name="GetTranscriptions(int?,int?,string,CancellationToken)">
+      <example>
+This sample shows how to call GetTranscriptions.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+SpeechClient client = new SpeechClient(endpoint, credential);
+
+Response<PageableTranscription> response = client.GetTranscriptions();
+]]></code>
+This sample shows how to call GetTranscriptions with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+SpeechClient client = new SpeechClient(endpoint, credential);
+
+Response<PageableTranscription> response = client.GetTranscriptions(skip: 1234, top: 1234, filter: "<filter>");
+]]></code></example>
+    </member>
+    <member name="GetTranscriptionsAsync(int?,int?,string,RequestContext)">
+      <example>
+This sample shows how to call GetTranscriptionsAsync and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+SpeechClient client = new SpeechClient(endpoint, credential);
+
+Response response = await client.GetTranscriptionsAsync(null, null, null, null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
+]]></code>
+This sample shows how to call GetTranscriptionsAsync with all parameters and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+SpeechClient client = new SpeechClient(endpoint, credential);
+
+Response response = await client.GetTranscriptionsAsync(1234, 1234, "<filter>", null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("values")[0].GetProperty("links").GetProperty("files").ToString());
+Console.WriteLine(result.GetProperty("values")[0].GetProperty("properties").GetProperty("wordLevelTimestampsEnabled").ToString());
+Console.WriteLine(result.GetProperty("values")[0].GetProperty("properties").GetProperty("displayFormWordLevelTimestampsEnabled").ToString());
+Console.WriteLine(result.GetProperty("values")[0].GetProperty("properties").GetProperty("duration").ToString());
+Console.WriteLine(result.GetProperty("values")[0].GetProperty("properties").GetProperty("channels")[0].ToString());
+Console.WriteLine(result.GetProperty("values")[0].GetProperty("properties").GetProperty("destinationContainerUrl").ToString());
+Console.WriteLine(result.GetProperty("values")[0].GetProperty("properties").GetProperty("punctuationMode").ToString());
+Console.WriteLine(result.GetProperty("values")[0].GetProperty("properties").GetProperty("profanityFilterMode").ToString());
+Console.WriteLine(result.GetProperty("values")[0].GetProperty("properties").GetProperty("timeToLive").ToString());
+Console.WriteLine(result.GetProperty("values")[0].GetProperty("properties").GetProperty("error").GetProperty("code").ToString());
+Console.WriteLine(result.GetProperty("values")[0].GetProperty("properties").GetProperty("error").GetProperty("message").ToString());
+Console.WriteLine(result.GetProperty("values")[0].GetProperty("properties").GetProperty("diarization").GetProperty("enabled").ToString());
+Console.WriteLine(result.GetProperty("values")[0].GetProperty("properties").GetProperty("diarization").GetProperty("maxSpeakers").ToString());
+Console.WriteLine(result.GetProperty("values")[0].GetProperty("properties").GetProperty("languageIdentification").GetProperty("mode").ToString());
+Console.WriteLine(result.GetProperty("values")[0].GetProperty("properties").GetProperty("languageIdentification").GetProperty("candidateLocales")[0].ToString());
+Console.WriteLine(result.GetProperty("values")[0].GetProperty("properties").GetProperty("languageIdentification").GetProperty("speechModelMapping").GetProperty("<key>").GetProperty("self").ToString());
+Console.WriteLine(result.GetProperty("values")[0].GetProperty("self").ToString());
+Console.WriteLine(result.GetProperty("values")[0].GetProperty("model").GetProperty("self").ToString());
+Console.WriteLine(result.GetProperty("values")[0].GetProperty("dataset").GetProperty("self").ToString());
+Console.WriteLine(result.GetProperty("values")[0].GetProperty("contentUrls")[0].ToString());
+Console.WriteLine(result.GetProperty("values")[0].GetProperty("contentContainerUrl").ToString());
+Console.WriteLine(result.GetProperty("values")[0].GetProperty("locale").ToString());
+Console.WriteLine(result.GetProperty("values")[0].GetProperty("displayName").ToString());
+Console.WriteLine(result.GetProperty("values")[0].GetProperty("description").ToString());
+Console.WriteLine(result.GetProperty("values")[0].GetProperty("customProperties").GetProperty("<key>").ToString());
+Console.WriteLine(result.GetProperty("values")[0].GetProperty("project").GetProperty("self").ToString());
+Console.WriteLine(result.GetProperty("values")[0].GetProperty("lastActionDateTime").ToString());
+Console.WriteLine(result.GetProperty("values")[0].GetProperty("status").ToString());
+Console.WriteLine(result.GetProperty("values")[0].GetProperty("createdDateTime").ToString());
+Console.WriteLine(result.GetProperty("@nextLink").ToString());
+]]></code></example>
+    </member>
+    <member name="GetTranscriptions(int?,int?,string,RequestContext)">
+      <example>
+This sample shows how to call GetTranscriptions and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+SpeechClient client = new SpeechClient(endpoint, credential);
+
+Response response = client.GetTranscriptions(null, null, null, null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
+]]></code>
+This sample shows how to call GetTranscriptions with all parameters and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+SpeechClient client = new SpeechClient(endpoint, credential);
+
+Response response = client.GetTranscriptions(1234, 1234, "<filter>", null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("values")[0].GetProperty("links").GetProperty("files").ToString());
+Console.WriteLine(result.GetProperty("values")[0].GetProperty("properties").GetProperty("wordLevelTimestampsEnabled").ToString());
+Console.WriteLine(result.GetProperty("values")[0].GetProperty("properties").GetProperty("displayFormWordLevelTimestampsEnabled").ToString());
+Console.WriteLine(result.GetProperty("values")[0].GetProperty("properties").GetProperty("duration").ToString());
+Console.WriteLine(result.GetProperty("values")[0].GetProperty("properties").GetProperty("channels")[0].ToString());
+Console.WriteLine(result.GetProperty("values")[0].GetProperty("properties").GetProperty("destinationContainerUrl").ToString());
+Console.WriteLine(result.GetProperty("values")[0].GetProperty("properties").GetProperty("punctuationMode").ToString());
+Console.WriteLine(result.GetProperty("values")[0].GetProperty("properties").GetProperty("profanityFilterMode").ToString());
+Console.WriteLine(result.GetProperty("values")[0].GetProperty("properties").GetProperty("timeToLive").ToString());
+Console.WriteLine(result.GetProperty("values")[0].GetProperty("properties").GetProperty("error").GetProperty("code").ToString());
+Console.WriteLine(result.GetProperty("values")[0].GetProperty("properties").GetProperty("error").GetProperty("message").ToString());
+Console.WriteLine(result.GetProperty("values")[0].GetProperty("properties").GetProperty("diarization").GetProperty("enabled").ToString());
+Console.WriteLine(result.GetProperty("values")[0].GetProperty("properties").GetProperty("diarization").GetProperty("maxSpeakers").ToString());
+Console.WriteLine(result.GetProperty("values")[0].GetProperty("properties").GetProperty("languageIdentification").GetProperty("mode").ToString());
+Console.WriteLine(result.GetProperty("values")[0].GetProperty("properties").GetProperty("languageIdentification").GetProperty("candidateLocales")[0].ToString());
+Console.WriteLine(result.GetProperty("values")[0].GetProperty("properties").GetProperty("languageIdentification").GetProperty("speechModelMapping").GetProperty("<key>").GetProperty("self").ToString());
+Console.WriteLine(result.GetProperty("values")[0].GetProperty("self").ToString());
+Console.WriteLine(result.GetProperty("values")[0].GetProperty("model").GetProperty("self").ToString());
+Console.WriteLine(result.GetProperty("values")[0].GetProperty("dataset").GetProperty("self").ToString());
+Console.WriteLine(result.GetProperty("values")[0].GetProperty("contentUrls")[0].ToString());
+Console.WriteLine(result.GetProperty("values")[0].GetProperty("contentContainerUrl").ToString());
+Console.WriteLine(result.GetProperty("values")[0].GetProperty("locale").ToString());
+Console.WriteLine(result.GetProperty("values")[0].GetProperty("displayName").ToString());
+Console.WriteLine(result.GetProperty("values")[0].GetProperty("description").ToString());
+Console.WriteLine(result.GetProperty("values")[0].GetProperty("customProperties").GetProperty("<key>").ToString());
+Console.WriteLine(result.GetProperty("values")[0].GetProperty("project").GetProperty("self").ToString());
+Console.WriteLine(result.GetProperty("values")[0].GetProperty("lastActionDateTime").ToString());
+Console.WriteLine(result.GetProperty("values")[0].GetProperty("status").ToString());
+Console.WriteLine(result.GetProperty("values")[0].GetProperty("createdDateTime").ToString());
+Console.WriteLine(result.GetProperty("@nextLink").ToString());
+]]></code></example>
+    </member>
+    <member name="GetTranscriptionAsync(string,CancellationToken)">
+      <example>
+This sample shows how to call GetTranscriptionAsync.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+SpeechClient client = new SpeechClient(endpoint, credential);
+
+Response<Transcription> response = await client.GetTranscriptionAsync("<id>");
+]]></code>
+This sample shows how to call GetTranscriptionAsync with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+SpeechClient client = new SpeechClient(endpoint, credential);
+
+Response<Transcription> response = await client.GetTranscriptionAsync("<id>");
+]]></code></example>
+    </member>
+    <member name="GetTranscription(string,CancellationToken)">
+      <example>
+This sample shows how to call GetTranscription.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+SpeechClient client = new SpeechClient(endpoint, credential);
+
+Response<Transcription> response = client.GetTranscription("<id>");
+]]></code>
+This sample shows how to call GetTranscription with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+SpeechClient client = new SpeechClient(endpoint, credential);
+
+Response<Transcription> response = client.GetTranscription("<id>");
+]]></code></example>
+    </member>
+    <member name="GetTranscriptionAsync(string,RequestContext)">
+      <example>
+This sample shows how to call GetTranscriptionAsync and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+SpeechClient client = new SpeechClient(endpoint, credential);
+
+Response response = await client.GetTranscriptionAsync("<id>", null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("properties").GetProperty("timeToLive").ToString());
+Console.WriteLine(result.GetProperty("locale").ToString());
+Console.WriteLine(result.GetProperty("displayName").ToString());
+]]></code>
+This sample shows how to call GetTranscriptionAsync with all parameters and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+SpeechClient client = new SpeechClient(endpoint, credential);
+
+Response response = await client.GetTranscriptionAsync("<id>", null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("links").GetProperty("files").ToString());
+Console.WriteLine(result.GetProperty("properties").GetProperty("wordLevelTimestampsEnabled").ToString());
+Console.WriteLine(result.GetProperty("properties").GetProperty("displayFormWordLevelTimestampsEnabled").ToString());
+Console.WriteLine(result.GetProperty("properties").GetProperty("duration").ToString());
+Console.WriteLine(result.GetProperty("properties").GetProperty("channels")[0].ToString());
+Console.WriteLine(result.GetProperty("properties").GetProperty("destinationContainerUrl").ToString());
+Console.WriteLine(result.GetProperty("properties").GetProperty("punctuationMode").ToString());
+Console.WriteLine(result.GetProperty("properties").GetProperty("profanityFilterMode").ToString());
+Console.WriteLine(result.GetProperty("properties").GetProperty("timeToLive").ToString());
+Console.WriteLine(result.GetProperty("properties").GetProperty("error").GetProperty("code").ToString());
+Console.WriteLine(result.GetProperty("properties").GetProperty("error").GetProperty("message").ToString());
+Console.WriteLine(result.GetProperty("properties").GetProperty("diarization").GetProperty("enabled").ToString());
+Console.WriteLine(result.GetProperty("properties").GetProperty("diarization").GetProperty("maxSpeakers").ToString());
+Console.WriteLine(result.GetProperty("properties").GetProperty("languageIdentification").GetProperty("mode").ToString());
+Console.WriteLine(result.GetProperty("properties").GetProperty("languageIdentification").GetProperty("candidateLocales")[0].ToString());
+Console.WriteLine(result.GetProperty("properties").GetProperty("languageIdentification").GetProperty("speechModelMapping").GetProperty("<key>").GetProperty("self").ToString());
+Console.WriteLine(result.GetProperty("self").ToString());
+Console.WriteLine(result.GetProperty("model").GetProperty("self").ToString());
+Console.WriteLine(result.GetProperty("dataset").GetProperty("self").ToString());
+Console.WriteLine(result.GetProperty("contentUrls")[0].ToString());
+Console.WriteLine(result.GetProperty("contentContainerUrl").ToString());
+Console.WriteLine(result.GetProperty("locale").ToString());
+Console.WriteLine(result.GetProperty("displayName").ToString());
+Console.WriteLine(result.GetProperty("description").ToString());
+Console.WriteLine(result.GetProperty("customProperties").GetProperty("<key>").ToString());
+Console.WriteLine(result.GetProperty("project").GetProperty("self").ToString());
+Console.WriteLine(result.GetProperty("lastActionDateTime").ToString());
+Console.WriteLine(result.GetProperty("status").ToString());
+Console.WriteLine(result.GetProperty("createdDateTime").ToString());
+]]></code></example>
+    </member>
+    <member name="GetTranscription(string,RequestContext)">
+      <example>
+This sample shows how to call GetTranscription and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+SpeechClient client = new SpeechClient(endpoint, credential);
+
+Response response = client.GetTranscription("<id>", null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("properties").GetProperty("timeToLive").ToString());
+Console.WriteLine(result.GetProperty("locale").ToString());
+Console.WriteLine(result.GetProperty("displayName").ToString());
+]]></code>
+This sample shows how to call GetTranscription with all parameters and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+SpeechClient client = new SpeechClient(endpoint, credential);
+
+Response response = client.GetTranscription("<id>", null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("links").GetProperty("files").ToString());
+Console.WriteLine(result.GetProperty("properties").GetProperty("wordLevelTimestampsEnabled").ToString());
+Console.WriteLine(result.GetProperty("properties").GetProperty("displayFormWordLevelTimestampsEnabled").ToString());
+Console.WriteLine(result.GetProperty("properties").GetProperty("duration").ToString());
+Console.WriteLine(result.GetProperty("properties").GetProperty("channels")[0].ToString());
+Console.WriteLine(result.GetProperty("properties").GetProperty("destinationContainerUrl").ToString());
+Console.WriteLine(result.GetProperty("properties").GetProperty("punctuationMode").ToString());
+Console.WriteLine(result.GetProperty("properties").GetProperty("profanityFilterMode").ToString());
+Console.WriteLine(result.GetProperty("properties").GetProperty("timeToLive").ToString());
+Console.WriteLine(result.GetProperty("properties").GetProperty("error").GetProperty("code").ToString());
+Console.WriteLine(result.GetProperty("properties").GetProperty("error").GetProperty("message").ToString());
+Console.WriteLine(result.GetProperty("properties").GetProperty("diarization").GetProperty("enabled").ToString());
+Console.WriteLine(result.GetProperty("properties").GetProperty("diarization").GetProperty("maxSpeakers").ToString());
+Console.WriteLine(result.GetProperty("properties").GetProperty("languageIdentification").GetProperty("mode").ToString());
+Console.WriteLine(result.GetProperty("properties").GetProperty("languageIdentification").GetProperty("candidateLocales")[0].ToString());
+Console.WriteLine(result.GetProperty("properties").GetProperty("languageIdentification").GetProperty("speechModelMapping").GetProperty("<key>").GetProperty("self").ToString());
+Console.WriteLine(result.GetProperty("self").ToString());
+Console.WriteLine(result.GetProperty("model").GetProperty("self").ToString());
+Console.WriteLine(result.GetProperty("dataset").GetProperty("self").ToString());
+Console.WriteLine(result.GetProperty("contentUrls")[0].ToString());
+Console.WriteLine(result.GetProperty("contentContainerUrl").ToString());
+Console.WriteLine(result.GetProperty("locale").ToString());
+Console.WriteLine(result.GetProperty("displayName").ToString());
+Console.WriteLine(result.GetProperty("description").ToString());
+Console.WriteLine(result.GetProperty("customProperties").GetProperty("<key>").ToString());
+Console.WriteLine(result.GetProperty("project").GetProperty("self").ToString());
+Console.WriteLine(result.GetProperty("lastActionDateTime").ToString());
+Console.WriteLine(result.GetProperty("status").ToString());
+Console.WriteLine(result.GetProperty("createdDateTime").ToString());
+]]></code></example>
+    </member>
+    <member name="PatchTranscriptionAsync(string,RequestContent,ContentType,RequestContext)">
+      <example>
+This sample shows how to call PatchTranscriptionAsync and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+SpeechClient client = new SpeechClient(endpoint, credential);
+
+using RequestContent content = RequestContent.Create(new object());
+Response response = await client.PatchTranscriptionAsync("<id>", content, new ContentType("application/json"));
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("properties").GetProperty("timeToLive").ToString());
+Console.WriteLine(result.GetProperty("locale").ToString());
+Console.WriteLine(result.GetProperty("displayName").ToString());
+]]></code>
+This sample shows how to call PatchTranscriptionAsync with all parameters and request content and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+SpeechClient client = new SpeechClient(endpoint, credential);
+
+using RequestContent content = RequestContent.Create(new
+{
+    displayName = "<displayName>",
+    description = "<description>",
+    customProperties = new
+    {
+        key = "<customProperties>",
+    },
+    project = new
+    {
+        self = "http://localhost:3000",
+    },
+});
+Response response = await client.PatchTranscriptionAsync("<id>", content, new ContentType("application/json"));
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("links").GetProperty("files").ToString());
+Console.WriteLine(result.GetProperty("properties").GetProperty("wordLevelTimestampsEnabled").ToString());
+Console.WriteLine(result.GetProperty("properties").GetProperty("displayFormWordLevelTimestampsEnabled").ToString());
+Console.WriteLine(result.GetProperty("properties").GetProperty("duration").ToString());
+Console.WriteLine(result.GetProperty("properties").GetProperty("channels")[0].ToString());
+Console.WriteLine(result.GetProperty("properties").GetProperty("destinationContainerUrl").ToString());
+Console.WriteLine(result.GetProperty("properties").GetProperty("punctuationMode").ToString());
+Console.WriteLine(result.GetProperty("properties").GetProperty("profanityFilterMode").ToString());
+Console.WriteLine(result.GetProperty("properties").GetProperty("timeToLive").ToString());
+Console.WriteLine(result.GetProperty("properties").GetProperty("error").GetProperty("code").ToString());
+Console.WriteLine(result.GetProperty("properties").GetProperty("error").GetProperty("message").ToString());
+Console.WriteLine(result.GetProperty("properties").GetProperty("diarization").GetProperty("enabled").ToString());
+Console.WriteLine(result.GetProperty("properties").GetProperty("diarization").GetProperty("maxSpeakers").ToString());
+Console.WriteLine(result.GetProperty("properties").GetProperty("languageIdentification").GetProperty("mode").ToString());
+Console.WriteLine(result.GetProperty("properties").GetProperty("languageIdentification").GetProperty("candidateLocales")[0].ToString());
+Console.WriteLine(result.GetProperty("properties").GetProperty("languageIdentification").GetProperty("speechModelMapping").GetProperty("<key>").GetProperty("self").ToString());
+Console.WriteLine(result.GetProperty("self").ToString());
+Console.WriteLine(result.GetProperty("model").GetProperty("self").ToString());
+Console.WriteLine(result.GetProperty("dataset").GetProperty("self").ToString());
+Console.WriteLine(result.GetProperty("contentUrls")[0].ToString());
+Console.WriteLine(result.GetProperty("contentContainerUrl").ToString());
+Console.WriteLine(result.GetProperty("locale").ToString());
+Console.WriteLine(result.GetProperty("displayName").ToString());
+Console.WriteLine(result.GetProperty("description").ToString());
+Console.WriteLine(result.GetProperty("customProperties").GetProperty("<key>").ToString());
+Console.WriteLine(result.GetProperty("project").GetProperty("self").ToString());
+Console.WriteLine(result.GetProperty("lastActionDateTime").ToString());
+Console.WriteLine(result.GetProperty("status").ToString());
+Console.WriteLine(result.GetProperty("createdDateTime").ToString());
+]]></code></example>
+    </member>
+    <member name="PatchTranscription(string,RequestContent,ContentType,RequestContext)">
+      <example>
+This sample shows how to call PatchTranscription and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+SpeechClient client = new SpeechClient(endpoint, credential);
+
+using RequestContent content = RequestContent.Create(new object());
+Response response = client.PatchTranscription("<id>", content, new ContentType("application/json"));
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("properties").GetProperty("timeToLive").ToString());
+Console.WriteLine(result.GetProperty("locale").ToString());
+Console.WriteLine(result.GetProperty("displayName").ToString());
+]]></code>
+This sample shows how to call PatchTranscription with all parameters and request content and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+SpeechClient client = new SpeechClient(endpoint, credential);
+
+using RequestContent content = RequestContent.Create(new
+{
+    displayName = "<displayName>",
+    description = "<description>",
+    customProperties = new
+    {
+        key = "<customProperties>",
+    },
+    project = new
+    {
+        self = "http://localhost:3000",
+    },
+});
+Response response = client.PatchTranscription("<id>", content, new ContentType("application/json"));
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("links").GetProperty("files").ToString());
+Console.WriteLine(result.GetProperty("properties").GetProperty("wordLevelTimestampsEnabled").ToString());
+Console.WriteLine(result.GetProperty("properties").GetProperty("displayFormWordLevelTimestampsEnabled").ToString());
+Console.WriteLine(result.GetProperty("properties").GetProperty("duration").ToString());
+Console.WriteLine(result.GetProperty("properties").GetProperty("channels")[0].ToString());
+Console.WriteLine(result.GetProperty("properties").GetProperty("destinationContainerUrl").ToString());
+Console.WriteLine(result.GetProperty("properties").GetProperty("punctuationMode").ToString());
+Console.WriteLine(result.GetProperty("properties").GetProperty("profanityFilterMode").ToString());
+Console.WriteLine(result.GetProperty("properties").GetProperty("timeToLive").ToString());
+Console.WriteLine(result.GetProperty("properties").GetProperty("error").GetProperty("code").ToString());
+Console.WriteLine(result.GetProperty("properties").GetProperty("error").GetProperty("message").ToString());
+Console.WriteLine(result.GetProperty("properties").GetProperty("diarization").GetProperty("enabled").ToString());
+Console.WriteLine(result.GetProperty("properties").GetProperty("diarization").GetProperty("maxSpeakers").ToString());
+Console.WriteLine(result.GetProperty("properties").GetProperty("languageIdentification").GetProperty("mode").ToString());
+Console.WriteLine(result.GetProperty("properties").GetProperty("languageIdentification").GetProperty("candidateLocales")[0].ToString());
+Console.WriteLine(result.GetProperty("properties").GetProperty("languageIdentification").GetProperty("speechModelMapping").GetProperty("<key>").GetProperty("self").ToString());
+Console.WriteLine(result.GetProperty("self").ToString());
+Console.WriteLine(result.GetProperty("model").GetProperty("self").ToString());
+Console.WriteLine(result.GetProperty("dataset").GetProperty("self").ToString());
+Console.WriteLine(result.GetProperty("contentUrls")[0].ToString());
+Console.WriteLine(result.GetProperty("contentContainerUrl").ToString());
+Console.WriteLine(result.GetProperty("locale").ToString());
+Console.WriteLine(result.GetProperty("displayName").ToString());
+Console.WriteLine(result.GetProperty("description").ToString());
+Console.WriteLine(result.GetProperty("customProperties").GetProperty("<key>").ToString());
+Console.WriteLine(result.GetProperty("project").GetProperty("self").ToString());
+Console.WriteLine(result.GetProperty("lastActionDateTime").ToString());
+Console.WriteLine(result.GetProperty("status").ToString());
+Console.WriteLine(result.GetProperty("createdDateTime").ToString());
+]]></code></example>
+    </member>
+    <member name="DeleteTranscriptionAsync(string,RequestContext)">
+      <example>
+This sample shows how to call DeleteTranscriptionAsync.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+SpeechClient client = new SpeechClient(endpoint, credential);
+
+Response response = await client.DeleteTranscriptionAsync("<id>");
+
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call DeleteTranscriptionAsync with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+SpeechClient client = new SpeechClient(endpoint, credential);
+
+Response response = await client.DeleteTranscriptionAsync("<id>");
+
+Console.WriteLine(response.Status);
+]]></code></example>
+    </member>
+    <member name="DeleteTranscription(string,RequestContext)">
+      <example>
+This sample shows how to call DeleteTranscription.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+SpeechClient client = new SpeechClient(endpoint, credential);
+
+Response response = client.DeleteTranscription("<id>");
+
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call DeleteTranscription with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+SpeechClient client = new SpeechClient(endpoint, credential);
+
+Response response = client.DeleteTranscription("<id>");
+
+Console.WriteLine(response.Status);
+]]></code></example>
+    </member>
+  </members>
+</doc>
