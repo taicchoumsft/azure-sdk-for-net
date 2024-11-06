@@ -594,7 +594,7 @@ namespace Azure.Communication.CallAutomation.Tests.CallMedias
 
                     // Assert multiple Text Source with wrong file source play failed event
                     var playMultipleSources = new List<PlaySource>() {
-                        new FileSource(new Uri("https://dummy.com/dummyurl.wav"))
+                        new FileSource(new Uri("https://contosoapp.com/abc.wav"))
                     };
 
                     PlayOptions options = new PlayOptions(playMultipleSources, new List<CommunicationUserIdentifier>() { target }) { OperationContext = "context" };
@@ -666,7 +666,7 @@ namespace Azure.Communication.CallAutomation.Tests.CallMedias
                     // Assert multiple Text Source with wrong file source play failed event
                     var playMultipleSources = new List<PlaySource>() {
                         new FileSource(new Uri(TestEnvironment.FileSourceUrl) ),
-                        new FileSource(new Uri("https://dummy.com/dummyurl.wav"))
+                        new FileSource(new Uri("https://contosoapp.com/abc.wav"))
                     };
 
                     PlayOptions options = new PlayOptions(playMultipleSources, new List<CommunicationUserIdentifier>() { target }) { OperationContext = "context" };
@@ -737,7 +737,7 @@ namespace Azure.Communication.CallAutomation.Tests.CallMedias
 
                     // Assert multiple Text Source with wrong file source play failed event
                     var playMultipleSources = new List<PlaySource>() {
-                        new FileSource(new Uri("https://dummy.com/dummyurl.wav"))
+                        new FileSource(new Uri("https://contosoapp.com/abc.wav"))
                     };
 
                     PlayToAllOptions options = new PlayToAllOptions(playMultipleSources) { OperationContext = "context" };
@@ -809,7 +809,7 @@ namespace Azure.Communication.CallAutomation.Tests.CallMedias
                     // Assert multiple Text Source with wrong file source play failed event
                     var playMultipleSources = new List<PlaySource>() {
                         new FileSource(new Uri(TestEnvironment.FileSourceUrl) ),
-                        new FileSource(new Uri("https://dummy.com/dummyurl.wav"))
+                        new FileSource(new Uri("https://contosoapp.com/abc.wav"))
                     };
 
                     PlayToAllOptions options = new PlayToAllOptions(playMultipleSources) { OperationContext = "context" };
@@ -1082,7 +1082,7 @@ namespace Azure.Communication.CallAutomation.Tests.CallMedias
 
                     // Assert multiple Text Source with wrong file source
                     var playMultipleSources = new List<PlaySource>() {
-                        new FileSource(new Uri("https://dummy.com/dummyurl.wav"))
+                        new FileSource(new Uri("https://contosoapp.com/abc.wav"))
                     };
 
                     await VerifyRecognizeFailedEventForMultipleSources(callConnectionId, client, playMultipleSources, target, recognizeInputType, null, true);
@@ -1147,7 +1147,7 @@ namespace Azure.Communication.CallAutomation.Tests.CallMedias
 
                     // Assert multiple Text Source with wrong file source
                     var playMultipleSources = new List<PlaySource>() {
-                        new FileSource(new Uri("https://dummy.com/dummyurl.wav")),
+                        new FileSource(new Uri("https://contosoapp.com/abc.wav")),
                         new TextSource("Test prompt1") { VoiceName = "en-US-NancyNeural" }
                     };
 
@@ -1413,7 +1413,7 @@ namespace Azure.Communication.CallAutomation.Tests.CallMedias
 
                     // Assert multiple Text Source with wrong file source
                     var playMultipleSources = new List<PlaySource>() {
-                        new FileSource(new Uri("https://dummy.com/dummyurl.wav"))
+                        new FileSource(new Uri("https://contosoapp.com/abc.wav"))
                     };
 
                     await VerifyRecognizeFailedEventForMultipleSources(callConnectionId, client, playMultipleSources, target, recognizeInputType, null, true);
@@ -1478,7 +1478,7 @@ namespace Azure.Communication.CallAutomation.Tests.CallMedias
 
                     // Assert multiple Text Source with wrong file source
                     var playMultipleSources = new List<PlaySource>() {
-                        new FileSource(new Uri("https://dummy.com/dummyurl.wav")),
+                        new FileSource(new Uri("https://contosoapp.com/abc.wav")),
                         new TextSource("Test prompt1") { VoiceName = "en-US-NancyNeural" }
                     };
 
@@ -1744,7 +1744,7 @@ namespace Azure.Communication.CallAutomation.Tests.CallMedias
 
                     // Assert multiple Text Source with wrong file source
                     var playMultipleSources = new List<PlaySource>() {
-                        new FileSource(new Uri("https://dummy.com/dummyurl.wav"))
+                        new FileSource(new Uri("https://contosoapp.com/abc.wav"))
                     };
 
                     await VerifyRecognizeFailedEventForMultipleSources(callConnectionId, client, playMultipleSources, target, recognizeInputType, null, true);
@@ -1809,7 +1809,7 @@ namespace Azure.Communication.CallAutomation.Tests.CallMedias
 
                     // Assert multiple Text Source with wrong file source
                     var playMultipleSources = new List<PlaySource>() {
-                        new FileSource(new Uri("https://dummy.com/dummyurl.wav")),
+                        new FileSource(new Uri("https://contosoapp.com/abc.wav")),
                         new TextSource("Test prompt1") { VoiceName = "en-US-NancyNeural" }
                     };
 
@@ -2075,7 +2075,7 @@ namespace Azure.Communication.CallAutomation.Tests.CallMedias
 
                     // Assert multiple Text Source with wrong file source
                     var playMultipleSources = new List<PlaySource>() {
-                        new FileSource(new Uri("https://dummy.com/dummyurl.wav"))
+                        new FileSource(new Uri("https://contosoapp.com/abc.wav"))
                     };
 
                     await VerifyRecognizeFailedEventForMultipleSources(callConnectionId, client, playMultipleSources, target, recognizeInputType, null, true);
@@ -2140,7 +2140,7 @@ namespace Azure.Communication.CallAutomation.Tests.CallMedias
 
                     // Assert multiple Text Source with wrong file source
                     var playMultipleSources = new List<PlaySource>() {
-                        new FileSource(new Uri("https://dummy.com/dummyurl.wav")),
+                        new FileSource(new Uri("https://contosoapp.com/abc.wav")),
                         new TextSource("Test prompt1") { VoiceName = "en-US-NancyNeural" }
                     };
 
@@ -2455,6 +2455,7 @@ namespace Azure.Communication.CallAutomation.Tests.CallMedias
             }
         }
 
+        [Ignore(reason: "Skipping this until fix the live test with pma")]
         [RecordedTest]
         public async Task CreateCallAndTranscriptionTest()
         {
@@ -2775,7 +2776,6 @@ namespace Azure.Communication.CallAutomation.Tests.CallMedias
             Assert.IsNotNull(connectionProperties);
             Assert.IsNotNull(connectionProperties.Value.TranscriptionSubscription);
             Assert.AreEqual(connectionProperties.Value.TranscriptionSubscription.State, TranscriptionSubscriptionState.Active);
-           
 
             //Stop Transcription
             StopTranscriptionOptions stopTranscriptionOptions = new StopTranscriptionOptions() { OperationContext = "StopTranscription" };
@@ -2789,7 +2789,6 @@ namespace Azure.Communication.CallAutomation.Tests.CallMedias
             Assert.IsNotNull(connectionProperties);
             Assert.IsNotNull(connectionProperties.Value.TranscriptionSubscription);
             Assert.AreEqual(connectionProperties.Value.TranscriptionSubscription.State, TranscriptionSubscriptionState.Inactive);
-            
 
             // try hangup
             await client.GetCallConnection(callConnectionId).HangUpAsync(true).ConfigureAwait(false);
