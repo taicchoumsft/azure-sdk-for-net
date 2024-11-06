@@ -16,7 +16,7 @@ namespace Azure.Communication.CallAutomation
         /// <summary>
         /// The latest version of the CallAutomation service.
         /// </summary>
-        internal const ServiceVersion LatestVersion = ServiceVersion.V2024_06_15_Preview;
+        internal const ServiceVersion LatestVersion = ServiceVersion.V2024_11_15_Preview;
 
         internal string ApiVersion { get; }
 
