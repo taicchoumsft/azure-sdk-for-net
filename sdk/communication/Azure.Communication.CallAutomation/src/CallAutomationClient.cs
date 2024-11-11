@@ -778,7 +778,6 @@ namespace Azure.Communication.CallAutomation
             }
 
             return connectRequest;
-
         }
 
         /// <summary>
