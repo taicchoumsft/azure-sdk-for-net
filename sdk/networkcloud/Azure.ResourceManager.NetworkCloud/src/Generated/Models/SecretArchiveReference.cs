@@ -7,12 +7,12 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
+using Azure.Core;
 
-namespace Azure.AI.Translation.Document
+namespace Azure.ResourceManager.NetworkCloud.Models
 {
-    /// <summary> Translation job submission batch request. </summary>
-    public partial class StartTranslationDetails
+    /// <summary> SecretArchiveReference represents the reference to a secret in a key vault. </summary>
+    public partial class SecretArchiveReference
     {
         /// <summary>
         /// Keeps track of any properties unknown to the library.
@@ -46,31 +46,29 @@ namespace Azure.AI.Translation.Document
         /// </summary>
         private IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
-        /// <summary> Initializes a new instance of <see cref="StartTranslationDetails"/>. </summary>
-        /// <param name="inputs"> The input list of documents or folders containing documents. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="inputs"/> is null. </exception>
-        public StartTranslationDetails(IEnumerable<DocumentTranslationInput> inputs)
+        /// <summary> Initializes a new instance of <see cref="SecretArchiveReference"/>. </summary>
+        internal SecretArchiveReference()
         {
-            Argument.AssertNotNull(inputs, nameof(inputs));
-
-            Inputs = inputs.ToList();
         }
 
-        /// <summary> Initializes a new instance of <see cref="StartTranslationDetails"/>. </summary>
-        /// <param name="inputs"> The input list of documents or folders containing documents. </param>
+        /// <summary> Initializes a new instance of <see cref="SecretArchiveReference"/>. </summary>
+        /// <param name="keyVaultId"> The resource ID of the key vault containing the secret. </param>
+        /// <param name="secretName"> The name of the secret in the key vault. </param>
+        /// <param name="secretVersion"> The version of the secret in the key vault. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal StartTranslationDetails(IList<DocumentTranslationInput> inputs, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal SecretArchiveReference(ResourceIdentifier keyVaultId, string secretName, string secretVersion, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
-            Inputs = inputs;
+            KeyVaultId = keyVaultId;
+            SecretName = secretName;
+            SecretVersion = secretVersion;
             _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
-        /// <summary> Initializes a new instance of <see cref="StartTranslationDetails"/> for deserialization. </summary>
-        internal StartTranslationDetails()
-        {
-        }
-
-        /// <summary> The input list of documents or folders containing documents. </summary>
-        public IList<DocumentTranslationInput> Inputs { get; }
+        /// <summary> The resource ID of the key vault containing the secret. </summary>
+        public ResourceIdentifier KeyVaultId { get; }
+        /// <summary> The name of the secret in the key vault. </summary>
+        public string SecretName { get; }
+        /// <summary> The version of the secret in the key vault. </summary>
+        public string SecretVersion { get; }
     }
 }
